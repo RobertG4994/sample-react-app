@@ -8,20 +8,19 @@ import {
   Button,
 } from "@nextui-org/react";
 import { useState } from "react";
-import { TiWeatherDownpour, TiWeatherSunny } from "react-icons/ti";
-import { getWeatherData } from "../api/actions";
+import { getProductData } from "../api/actions";
 
 const WeatherCard: React.FC = () => {
-  const [data, setData] = useState<WeatherData>();
+  const [data, setData] = useState<ProductData>();
   const [loadingState, setLoadingState] = useState(false);
-  const [city, setCity] = useState("");
+  const [product, setProduct] = useState("");
   const [error, setError] = useState("");
 
   const handleSearch = () => {
-    console.log("Fetching Weather Data...");
-    console.log(city);
+    console.log("Fetching Product Data...");
+    console.log(product);
     setLoadingState(true);
-    getWeatherData(city)
+    getProductData(product)
       .then((res) => {
         setError("");
         if (res) {
@@ -49,12 +48,12 @@ const WeatherCard: React.FC = () => {
         >
           <div className="flex flex-col w-full p-2 space-y-4">
             <Input
-              id="cityname"
+              id="productname"
               type="text"
-              label="City"
-              value={city}
+              label="Product"
+              value={product}
               onChange={(e) => {
-                setCity(e.target.value);
+                setProduct(e.target.value);
               }}
             />
             <Button
@@ -72,20 +71,12 @@ const WeatherCard: React.FC = () => {
       {data ? (
         <CardBody>
           <div className="flex flex-col items-center">
-            <h1 className="text-3xl font-bold">{data.city}</h1>
-            {data.temperature > 20 ? (
-              <div>
-                <TiWeatherSunny className="w-36 h-36" />
-              </div>
-            ) : (
-              <div>
-                <TiWeatherDownpour className="w-36 h-36" />
-              </div>
-            )}
-            <p className="text-3xl font-bold">{data.temperature}°C</p>
-            <p className="text-lg">Humidity: {data.humidity}%</p>
-            <p className="text-lg">Wind: {data.wind} km/h</p>
-            <p className="text-lg">Rain: {data.rain} %</p>
+            <h1 className="text-3xl font-bold">{data.product}</h1>
+            <p className="text-3xl font-bold">{data.ingredient}</p>
+            <p className="text-3xl font-bold">{data.calories} Kcal</p>
+            <p className="text-lg">Humidity: {data.servings} servings</p>
+            <p className="text-lg">Wind: {data.weight} g</p>
+            <p className="text-lg">Rain: {data.price} £</p>
           </div>
         </CardBody>
       ) : (

@@ -1,7 +1,8 @@
-interface WeatherData {
-  city: string;
-  temperature: number;
-  humidity: number;
-  wind: number;
-  rain: number;
+interface ProductData{
+  product:string,
+  ingredient:string,
+  calories : number;
+  servings : number;
+  weight : number;
+  price : number;
 }
